@@ -7,6 +7,9 @@ export const metadata: Metadata = {
   title: "Concept Gallery | Nexa Digital Agency",
   description:
     "A gallery of illustrative workspace imagery used in the Nexa Digital Agency portfolio demonstration.",
+  alternates: {
+    canonical: "/gallery",
+  },
 };
 
 export default function GalleryPage() {

@@ -6,6 +6,10 @@ The project demonstrates a complete responsive multi-page experience for a ficti
 
 The agency identity used in this project is fictional and is intended only for portfolio presentation.
 
+## Live Demo
+
+https://agency-frontend-showcase.vercel.app
+
 ## Features
 
 - Responsive multi-page website
@@ -20,7 +24,7 @@ The agency identity used in this project is fictional and is intended only for p
 - Accessible UI structure
 - Server-side contact email delivery
 - Visitor confirmation emails
-- Form validation and spam-protection honeypot
+- Form validation and honeypot spam protection
 
 ## Tech Stack
 
@@ -50,3 +54,4 @@ Nodemailer
 Gmail SMTP
      ↓
 Portfolio Inbox
+```

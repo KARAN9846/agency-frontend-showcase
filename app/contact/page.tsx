@@ -8,6 +8,9 @@ export const metadata: Metadata = {
   title: "Contact | Nexa Digital Agency",
   description:
     "Use the portfolio contact form to explore a web, software, mobile or digital project concept.",
+  alternates: {
+    canonical: "/contact",
+  },
 };
 
 export default function ContactPage() {

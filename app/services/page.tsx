@@ -12,6 +12,9 @@ export const metadata: Metadata = {
   title: "Services | Nexa Digital Agency",
   description:
     "Explore the software, web, mobile and digital marketing capabilities presented in this portfolio demonstration.",
+  alternates: {
+    canonical: "/services",
+  },
 };
 
 export default function ServicesPage() {

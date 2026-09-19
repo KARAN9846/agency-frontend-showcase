@@ -7,6 +7,9 @@ export const metadata: Metadata = {
   title: "Careers Demo | Nexa Digital Agency",
   description:
     "A demonstration careers interface included in the Nexa Digital Agency portfolio project. No roles are currently being advertised.",
+  alternates: {
+    canonical: "/careers",
+  },
 };
 
 export default function CareersPage() {

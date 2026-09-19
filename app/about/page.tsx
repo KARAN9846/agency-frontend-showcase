@@ -10,6 +10,9 @@ export const metadata: Metadata = {
   title: "About the Concept | Nexa Digital Agency",
   description:
     "Explore the thinking, capabilities and design principles behind this fictional digital agency portfolio concept.",
+  alternates: {
+    canonical: "/about",
+  },
 };
 
 export default function AboutPage() {

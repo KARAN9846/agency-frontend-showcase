@@ -11,6 +11,9 @@ export const metadata: Metadata = {
   title: "Nexa Digital Agency | Digital Experiences & Web Solutions",
   description:
     "A portfolio demonstration of modern web, software, mobile and digital service experiences.",
+  alternates: {
+    canonical: "/",
+  },
 };
 
 export default function Home() {

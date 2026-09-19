@@ -6,6 +6,7 @@ export default function JsonLd() {
     description:
       "A fictional digital agency website created as a frontend portfolio demonstration.",
     genre: "Frontend development portfolio",
+    url: "https://agency-frontend-showcase.vercel.app",
   };
 
   return (

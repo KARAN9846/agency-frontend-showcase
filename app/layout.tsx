@@ -18,6 +18,8 @@ const manrope = Manrope({
 });
 
 export const metadata: Metadata = {
+  metadataBase: new URL("https://agency-frontend-showcase.vercel.app"),
+
   title: "Nexa Digital Agency | Digital Experiences & Web Solutions",
 
   description:
@@ -28,6 +30,7 @@ export const metadata: Metadata = {
     description:
       "A fictional digital agency website created as a frontend portfolio demonstration.",
     siteName: "Nexa Digital Agency",
+    url: "https://agency-frontend-showcase.vercel.app",
     locale: "en_IN",
     type: "website",
   },
