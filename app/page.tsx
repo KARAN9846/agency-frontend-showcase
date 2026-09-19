@@ -1,5 +1,4 @@
 import type { Metadata } from "next";
-import WelcomePopup from "@/components/home/WelcomePopup";
 import { Hero } from "@/components/home/Hero";
 import { ServicesPreview } from "@/components/home/ServicesPreview";
 import WhyNexa from "@/components/home/WhyNexa";
@@ -19,7 +18,6 @@ export const metadata: Metadata = {
 export default function Home() {
   return (
     <main>
-      <WelcomePopup />
       <Hero />
       <HowWeGrow />
       <ServicesPreview />
