@@ -1,535 +1,168 @@
-"use client";
-
-import { useEffect, useState } from "react";
-import { ArrowUpRight } from "lucide-react";
+import { ArrowUpRight, TrendingUp } from "lucide-react";
 import { Container } from "@/components/ui/Container";
 
 const growthSteps = [
-  {
-    number: "01",
-    title: "Discover",
-    description: "Understand the business, goals and requirements.",
-  },
-  {
-    number: "02",
-    title: "Plan",
-    description: "Turn requirements into a clear roadmap and direction.",
-  },
-  {
-    number: "03",
-    title: "Design",
-    description: "Shape the experience, interface and solution.",
-  },
-  {
-    number: "04",
-    title: "Develop",
-    description: "Build reliable technology with quality and performance.",
-  },
-  {
-    number: "05",
-    title: "Launch",
-    description: "Test, refine and prepare the solution for launch.",
-  },
-  {
-    number: "06",
-    title: "Grow",
-    description: "Continuously improve and create new opportunities.",
-  },
+  { number: "01", title: "Discover" },
+  { number: "02", title: "Plan" },
+  { number: "03", title: "Design" },
+  { number: "04", title: "Develop" },
+  { number: "05", title: "Launch" },
+  { number: "06", title: "Grow" },
 ];
 
-/*
- * Percentage-based positions.
- * These stay consistent across desktop and mobile.
- */
-const graphPositions = [
-  { x: 4, y: 78 },
-  { x: 21, y: 66 },
-  { x: 39, y: 53 },
-  { x: 57, y: 40 },
-  { x: 75, y: 25 },
-  { x: 92, y: 10 },
+const graphPoints = [
+  { x: 83, y: 208 },
+  { x: 250, y: 184 },
+  { x: 417, y: 153 },
+  { x: 583, y: 117 },
+  { x: 750, y: 76 },
+  { x: 917, y: 30 },
 ];
 
 export function HowWeGrow() {
-  const [activeStep, setActiveStep] = useState(0);
-
-  /*
-   * Automatically move through the six stages.
-   * 900ms keeps the animation quick and noticeable.
-   */
-  useEffect(() => {
-    const interval = window.setInterval(() => {
-      setActiveStep((current) => (current + 1) % growthSteps.length);
-    }, 900);
-
-    return () => window.clearInterval(interval);
-  }, []);
-
   return (
-    <section className="bg-[#F8FAFC] px-3 py-8 sm:px-5 sm:py-12 lg:px-6 lg:py-16">
+    <section
+      aria-labelledby="growth-heading"
+      className="overflow-hidden bg-[#F8FAFC] py-14 sm:py-18 lg:py-22"
+    >
       <Container>
-        {/* =====================================================
-            GROWTH SECTION
-        ====================================================== */}
-        <div
-          className="
-            mx-auto
-            w-full
-            max-w-[1180px]
-            overflow-hidden
-            rounded-[22px]
-            bg-[#101828]
-            text-white
-            shadow-[0_24px_70px_rgba(16,24,40,0.12)]
-            sm:rounded-[26px]
-            lg:rounded-[28px]
-          "
-        >
-          <div
-            className="
-              px-5
-              py-7
-              sm:px-8
-              sm:py-9
-              lg:px-10
-              lg:py-10
-            "
-          >
-            {/* =================================================
-                HEADER
-            ================================================== */}
-            <div
-              className="
-                flex
-                flex-col
-                gap-4
-                sm:gap-5
-                md:flex-row
-                md:items-end
-                md:justify-between
-              "
-            >
-              <div className="max-w-[650px]">
-                <p
-                  className="
-                    text-[10px]
-                    font-bold
-                    uppercase
-                    tracking-[0.2em]
-                    text-[#F65011]
-                    sm:text-xs
-                  "
-                >
-                  How We Grow
-                </p>
-
-                <h2
-                  className="
-                    mt-2.5
-                    text-[30px]
-                    font-extrabold
-                    leading-[1.04]
-                    tracking-[-0.035em]
-                    sm:mt-3
-                    sm:text-4xl
-                    lg:text-[44px]
-                  "
-                >
-                  From idea to{" "}
-                  <span className="text-[#F65011]">lasting growth.</span>
-                </h2>
-              </div>
-
-              <p
-                className="
-                  max-w-[350px]
-                  text-xs
-                  leading-5
-                  text-white/50
-                  sm:text-sm
-                  sm:leading-6
-                  md:pb-1
-                "
-              >
-                A focused process that continuously moves your business forward.
+        <div className="mx-auto max-w-6xl">
+          <div className="flex flex-col gap-4 sm:flex-row sm:items-end sm:justify-between">
+            <div>
+              <p className="text-xs font-bold uppercase tracking-[0.18em] text-[#F65011]">
+                How we grow
               </p>
+              <h2
+                id="growth-heading"
+                className="mt-3 max-w-2xl text-3xl font-extrabold leading-[1.08] tracking-[-0.035em] text-[#101828] sm:text-4xl lg:text-[44px]"
+              >
+                From an idea to
+                <span className="text-[#F65011]"> lasting momentum.</span>
+              </h2>
             </div>
 
-            {/* =================================================
-                GRAPH PANEL
-            ================================================== */}
+            <p className="max-w-sm text-sm leading-6 text-[#667085] sm:text-right">
+              One clear process. Six connected stages.
+            </p>
+          </div>
+
+          <div className="relative mt-8 overflow-hidden rounded-[24px] bg-[#101828] px-4 pb-5 pt-5 shadow-[0_24px_70px_rgba(16,24,40,0.14)] sm:mt-10 sm:rounded-[28px] sm:px-7 sm:pb-7 sm:pt-7 lg:px-9">
             <div
-              className="
-                mt-6
-                rounded-[18px]
-                border
-                border-white/[0.08]
-                bg-[#111C30]
-                px-3.5
-                py-4
-                sm:mt-7
-                sm:rounded-[22px]
-                sm:px-6
-                sm:py-6
-              "
-            >
-              {/* =================================================
-                  GRAPH
-              ================================================== */}
-              <div
-                className="
-                  relative
-                  h-[235px]
-                  w-full
-                  sm:h-[250px]
-                  lg:h-[260px]
-                "
-              >
-                {/* ---------------------------------------------
-                    SUBTLE HORIZONTAL GRID
-                ---------------------------------------------- */}
-                <div
-                  className="
-                    pointer-events-none
-                    absolute
-                    inset-x-0
-                    top-2
-                    bottom-[54px]
-                  "
-                >
-                  <div className="absolute inset-x-0 top-0 border-t border-white/[0.035]" />
+              aria-hidden="true"
+              className="pointer-events-none absolute -right-20 -top-32 h-72 w-72 rounded-full bg-[#F65011]/10 blur-3xl"
+            />
 
-                  <div className="absolute inset-x-0 top-1/3 border-t border-white/[0.035]" />
-
-                  <div className="absolute inset-x-0 top-2/3 border-t border-white/[0.035]" />
-
-                  <div className="absolute inset-x-0 bottom-0 border-t border-white/[0.045]" />
-                </div>
-
-                {/* ---------------------------------------------
-                    VERTICAL GUIDES
-                ---------------------------------------------- */}
-                <div
-                  className="
-                    pointer-events-none
-                    absolute
-                    inset-x-0
-                    top-2
-                    bottom-[54px]
-                    flex
-                    justify-between
-                    px-[5%]
-                  "
-                >
-                  {growthSteps.map((step, index) => (
-                    <div
-                      key={step.number}
-                      className={`
-                        h-full
-                        border-l
-                        transition-colors
-                        duration-300
-                        ${
-                          index <= activeStep
-                            ? "border-[#F65011]/10"
-                            : "border-white/[0.025]"
-                        }
-                      `}
-                    />
-                  ))}
-                </div>
-
-                {/* ---------------------------------------------
-                    GROWTH SVG
-                ---------------------------------------------- */}
-                <svg
-                  viewBox="0 0 1000 300"
-                  preserveAspectRatio="none"
-                  className="
-                    pointer-events-none
-                    absolute
-                    inset-x-[3%]
-                    top-2
-                    h-[158px]
-                    w-[94%]
-                    sm:h-[178px]
-                    lg:h-[185px]
-                  "
-                  aria-hidden="true"
-                >
-                  <defs>
-                    <linearGradient
-                      id="growthGradient"
-                      x1="0"
-                      y1="0"
-                      x2="0"
-                      y2="1"
-                    >
-                      <stop
-                        offset="0%"
-                        stopColor="#F65011"
-                        stopOpacity="0.16"
-                      />
-
-                      <stop offset="100%" stopColor="#F65011" stopOpacity="0" />
-                    </linearGradient>
-                  </defs>
-
-                  {/* Area under curve */}
-                  <path
-                    d="
-                      M 40 245
-                      C 135 238, 185 228, 210 220
-                      C 285 207, 345 192, 390 178
-                      C 465 161, 525 147, 570 130
-                      C 645 112, 705 94, 750 76
-                      C 820 57, 875 40, 920 25
-                      L 920 245
-                      L 40 245
-                      Z
-                    "
-                    fill="url(#growthGradient)"
-                    opacity="0.3"
-                  />
-
-                  {/* Main growth curve */}
-                  <path
-                    d="
-                      M 40 245
-                      C 135 238, 185 228, 210 220
-                      C 285 207, 345 192, 390 178
-                      C 465 161, 525 147, 570 130
-                      C 645 112, 705 94, 750 76
-                      C 820 57, 875 40, 920 25
-                    "
-                    fill="none"
-                    stroke="#F65011"
-                    strokeWidth="4"
-                    strokeLinecap="round"
-                    className="drop-shadow-[0_0_7px_rgba(246,80,17,0.42)]"
-                  />
-                </svg>
-
-                {/* ---------------------------------------------
-                    GRAPH POINTS
-                ---------------------------------------------- */}
-                <div
-                  className="
-                    absolute
-                    inset-x-[3%]
-                    top-2
-                    bottom-[54px]
-                  "
-                >
-                  {growthSteps.map((step, index) => {
-                    const position = graphPositions[index];
-
-                    const isActive = index === activeStep;
-                    const isPast = index < activeStep;
-
-                    return (
-                      <div
-                        key={step.number}
-                        className="
-                          absolute
-                          -translate-x-1/2
-                          -translate-y-1/2
-                        "
-                        style={{
-                          left: `${position.x}%`,
-                          top: `${position.y}%`,
-                        }}
-                      >
-                        {/* Active glow */}
-                        <div
-                          className={`
-                            pointer-events-none
-                            absolute
-                            inset-[-12px]
-                            rounded-full
-                            bg-[#F65011]/25
-                            blur-xl
-                            transition-all
-                            duration-300
-                            ${
-                              isActive
-                                ? "scale-100 opacity-100"
-                                : "scale-50 opacity-0"
-                            }
-                          `}
-                        />
-
-                        {/* Point */}
-                        <div
-                          className={`
-                            relative
-                            flex
-                            h-7
-                            w-7
-                            items-center
-                            justify-center
-                            rounded-full
-                            border
-                            transition-all
-                            duration-300
-                            sm:h-9
-                            sm:w-9
-                            ${
-                              isActive
-                                ? `
-                                  scale-110
-                                  border-[#F65011]
-                                  bg-[#F65011]
-                                  shadow-[0_0_24px_rgba(246,80,17,0.55)]
-                                `
-                                : isPast
-                                  ? `
-                                    border-[#F65011]/70
-                                    bg-[#101828]
-                                  `
-                                  : `
-                                    border-[#F65011]/45
-                                    bg-[#101828]
-                                  `
-                            }
-                          `}
-                        >
-                          <div
-                            className={`
-                              h-1.5
-                              w-1.5
-                              rounded-full
-                              transition-all
-                              duration-300
-                              sm:h-2
-                              sm:w-2
-                              ${isActive ? "bg-white" : "bg-[#F65011]"}
-                            `}
-                          />
-                        </div>
-                      </div>
-                    );
-                  })}
-                </div>
-
-                {/* ---------------------------------------------
-                    GROWTH LABEL
-                ---------------------------------------------- */}
-                {/* ---------------------------------------------
-    GROWTH LABEL
----------------------------------------------- */}
-                <div
-                  className="
-    pointer-events-none
-    absolute
-    left-[68%]
-    top-0
-    z-30
-    text-left
-    sm:left-[72%]
-    lg:left-[76%]
-  "
-                >
-                  <span
-                    className="
-      block
-      text-[7px]
-      font-bold
-      uppercase
-      leading-none
-      tracking-[0.16em]
-      text-white/35
-      sm:text-[9px]
-    "
-                  >
-                    Growth
-                  </span>
-
-                  <span
-                    className="
-      mt-1
-      inline-flex
-      items-center
-      gap-0.5
-      text-[8px]
-      font-bold
-      leading-none
-      text-[#F65011]
-      sm:text-[10px]
-    "
-                  >
-                    Forward
-                    <ArrowUpRight
-                      size={10}
-                      className="sm:h-[11px] sm:w-[11px]"
-                    />
-                  </span>
-                </div>
-                {/* ---------------------------------------------
-                    STEP NUMBERS / LABELS
-                    No descriptions / no progress bars
-                ---------------------------------------------- */}
-                <div
-                  className="
-                    absolute
-                    inset-x-[2%]
-                    bottom-0
-                    grid
-                    grid-cols-6
-                    items-start
-                  "
-                >
-                  {growthSteps.map((step, index) => {
-                    const isActive = index === activeStep;
-
-                    return (
-                      <div
-                        key={step.number}
-                        className="
-                          flex
-                          min-w-0
-                          flex-col
-                          items-center
-                          text-center
-                        "
-                      >
-                        {/* Number */}
-                        <span
-                          className={`
-                            text-[9px]
-                            font-bold
-                            tracking-[0.05em]
-                            transition-colors
-                            duration-300
-                            sm:text-[11px]
-                            ${isActive ? "text-[#F65011]" : "text-white/30"}
-                          `}
-                        >
-                          {step.number}
-                        </span>
-
-                        {/* Stage title */}
-                        <span
-                          className={`
-                            mt-1
-                            max-w-full
-                            whitespace-nowrap
-                            text-[8px]
-                            font-bold
-                            leading-none
-                            transition-colors
-                            duration-300
-                            sm:text-[11px]
-                            ${isActive ? "text-white" : "text-white/40"}
-                          `}
-                        >
-                          {step.title}
-                        </span>
-                      </div>
-                    );
-                  })}
+            <div className="relative flex items-center justify-between border-b border-white/[0.08] pb-4">
+              <div className="flex items-center gap-2.5">
+                <span className="flex h-9 w-9 items-center justify-center rounded-xl bg-[#F65011] text-white">
+                  <TrendingUp size={18} strokeWidth={2.2} aria-hidden="true" />
+                </span>
+                <div>
+                  <p className="text-sm font-bold text-white">Growth path</p>
+                  <p className="text-[10px] text-white/40 sm:text-xs">
+                    Idea to improvement
+                  </p>
                 </div>
               </div>
+
+              <div className="flex items-center gap-1.5 text-[10px] font-bold uppercase tracking-[0.14em] text-[#F65011] sm:text-xs">
+                Forward
+                <ArrowUpRight size={14} aria-hidden="true" />
+              </div>
+            </div>
+
+            <div className="relative mt-4 h-[185px] sm:h-[225px] lg:h-[255px]">
+              <svg
+                viewBox="0 0 1000 240"
+                preserveAspectRatio="none"
+                className="h-full w-full"
+                role="img"
+                aria-label="Upward growth graph from discovery through growth"
+              >
+                <defs>
+                  <linearGradient
+                    id="growth-fill"
+                    x1="0"
+                    y1="0"
+                    x2="0"
+                    y2="1"
+                  >
+                    <stop offset="0%" stopColor="#F65011" stopOpacity="0.24" />
+                    <stop offset="100%" stopColor="#F65011" stopOpacity="0" />
+                  </linearGradient>
+                  <linearGradient
+                    id="growth-line"
+                    x1="0"
+                    y1="0"
+                    x2="1"
+                    y2="0"
+                  >
+                    <stop offset="0%" stopColor="#FF8A5C" />
+                    <stop offset="100%" stopColor="#F65011" />
+                  </linearGradient>
+                </defs>
+
+                {[52, 104, 156, 208].map((y) => (
+                  <line
+                    key={y}
+                    x1="20"
+                    y1={y}
+                    x2="980"
+                    y2={y}
+                    stroke="rgba(255,255,255,0.055)"
+                    strokeWidth="1"
+                    strokeDasharray="4 8"
+                  />
+                ))}
+
+                <path
+                  d="M83 208 C145 204 197 193 250 184 C312 173 363 163 417 153 C480 141 530 129 583 117 C645 103 698 89 750 76 C812 61 864 45 917 30 L917 226 L83 226 Z"
+                  fill="url(#growth-fill)"
+                />
+                <path
+                  d="M83 208 C145 204 197 193 250 184 C312 173 363 163 417 153 C480 141 530 129 583 117 C645 103 698 89 750 76 C812 61 864 45 917 30"
+                  fill="none"
+                  stroke="url(#growth-line)"
+                  strokeWidth="5"
+                  strokeLinecap="round"
+                  vectorEffect="non-scaling-stroke"
+                />
+
+                {graphPoints.map((point, index) => (
+                  <g key={growthSteps[index].number}>
+                    <circle
+                      cx={point.x}
+                      cy={point.y}
+                      r="14"
+                      fill="#101828"
+                      stroke="#F65011"
+                      strokeWidth="5"
+                      vectorEffect="non-scaling-stroke"
+                    />
+                    <circle cx={point.x} cy={point.y} r="4" fill="#FFFFFF" />
+                  </g>
+                ))}
+              </svg>
+            </div>
+
+            <div className="relative grid grid-cols-3 gap-2 border-t border-white/[0.08] pt-4 sm:grid-cols-6 sm:gap-0 sm:pt-5">
+              {growthSteps.map((step, index) => (
+                <div
+                  key={step.number}
+                  className={`min-w-0 px-2 py-2 sm:border-r sm:border-white/[0.08] sm:px-3 sm:py-0 sm:last:border-r-0 lg:px-5 ${
+                    index >= 3 ? "border-t border-white/[0.08] pt-4 sm:border-t-0 sm:pt-0" : ""
+                  }`}
+                >
+                  <div className="flex items-center gap-2 sm:block">
+                    <span className="text-[9px] font-bold tracking-[0.1em] text-[#F65011] sm:text-[10px]">
+                      {step.number}
+                    </span>
+                    <h3 className="truncate text-xs font-bold text-white sm:mt-1.5 sm:text-sm lg:text-base">
+                      {step.title}
+                    </h3>
+                  </div>
+                </div>
+              ))}
             </div>
           </div>
         </div>
