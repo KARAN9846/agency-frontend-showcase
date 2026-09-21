@@ -55,3 +55,23 @@ Gmail SMTP
      ↓
 Portfolio Inbox
 ```
+
+## Deployment Modes
+
+The normal resume/GitHub deployment uses Gmail SMTP and keeps the complete
+contact workflow enabled when `SMTP_USER`, `SMTP_APP_PASSWORD`, and
+`CONTACT_EMAIL` are configured.
+
+An Upwork-safe deployment can use the same repository and frontend experience
+with demonstration-only contact behavior. Set both of these Vercel environment
+variables to `true`:
+
+```text
+NEXT_PUBLIC_UPWORK_SHOWCASE=true
+UPWORK_SHOWCASE=true
+```
+
+In this mode the form retains its fields, validation, and interaction states,
+but email delivery and off-platform contact paths are disabled. The API also
+enforces demo behavior independently whenever `UPWORK_SHOWCASE=true`, so it
+does not load Nodemailer or require SMTP credentials.

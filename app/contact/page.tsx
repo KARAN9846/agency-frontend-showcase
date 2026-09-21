@@ -14,11 +14,15 @@ export const metadata: Metadata = {
 };
 
 export default function ContactPage() {
+  const showcaseMode =
+    process.env.NEXT_PUBLIC_UPWORK_SHOWCASE === "true" &&
+    process.env.UPWORK_SHOWCASE === "true";
+
   return (
     <main>
       <ContactHero />
-      <ContactForm />
-      <ContactDetails />
+      <ContactForm showcaseMode={showcaseMode} />
+      <ContactDetails showcaseMode={showcaseMode} />
     </main>
   );
 }

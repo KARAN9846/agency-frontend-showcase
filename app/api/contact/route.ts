@@ -1,14 +1,10 @@
 import { randomUUID } from "node:crypto";
 import { NextResponse } from "next/server";
 import { z } from "zod";
-import { buildContactConfirmationEmail } from "@/lib/email/contact-confirmation";
-import { buildContactNotificationEmail } from "@/lib/email/contact-notification";
-import {
-  sendAdminNotificationEmail,
-  sendCustomerConfirmationEmail,
-} from "@/lib/email/gmail";
 
 export const runtime = "nodejs";
+
+const MAX_REQUEST_SIZE = 64 * 1024;
 
 const contactSchema = z
   .object({
@@ -40,7 +36,25 @@ export async function POST(request: Request) {
   let body: unknown;
 
   try {
-    body = await request.json();
+    const contentLength = Number(request.headers.get("content-length") || 0);
+
+    if (contentLength > MAX_REQUEST_SIZE) {
+      return NextResponse.json(
+        { success: false, message: "The request body is too large." },
+        { status: 413 },
+      );
+    }
+
+    const rawBody = await request.text();
+
+    if (new TextEncoder().encode(rawBody).byteLength > MAX_REQUEST_SIZE) {
+      return NextResponse.json(
+        { success: false, message: "The request body is too large." },
+        { status: 413 },
+      );
+    }
+
+    body = JSON.parse(rawBody);
   } catch {
     return NextResponse.json(
       { success: false, message: "The request body must be valid JSON." },
@@ -62,16 +76,39 @@ export async function POST(request: Request) {
   }
 
   const { name, email, company, phone, service, message, website } = result.data;
+  const isUpworkShowcase = process.env.UPWORK_SHOWCASE === "true";
 
   // Silently accept the honeypot so bots do not learn how they were detected.
   if (website) {
     return NextResponse.json(
-      { success: true, message: "Your enquiry has been submitted successfully." },
+      isUpworkShowcase
+        ? { success: true, demo: true, emailSent: false }
+        : {
+            success: true,
+            message: "Your enquiry has been submitted successfully.",
+          },
+      { status: 201 },
+    );
+  }
+
+  if (isUpworkShowcase) {
+    return NextResponse.json(
+      { success: true, demo: true, emailSent: false },
       { status: 201 },
     );
   }
 
   const enquiryId = randomUUID();
+
+  const [
+    { buildContactConfirmationEmail },
+    { buildContactNotificationEmail },
+    { sendAdminNotificationEmail, sendCustomerConfirmationEmail },
+  ] = await Promise.all([
+    import("@/lib/email/contact-confirmation"),
+    import("@/lib/email/contact-notification"),
+    import("@/lib/email/gmail"),
+  ]);
 
   try {
     await sendAdminNotificationEmail({

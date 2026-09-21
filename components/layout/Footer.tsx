@@ -19,6 +19,10 @@ const serviceLinks = [
 ];
 
 export default function Footer() {
+  const showcaseMode =
+    process.env.NEXT_PUBLIC_UPWORK_SHOWCASE === "true" &&
+    process.env.UPWORK_SHOWCASE === "true";
+
   return (
     <footer className="bg-[#101828] text-white">
       <div className="mx-auto max-w-7xl px-6 py-12 sm:px-8 sm:py-14 lg:px-10 lg:py-16">
@@ -49,31 +53,33 @@ export default function Footer() {
               A fictional digital agency interface demonstrating modern web,
               software, mobile and digital service experiences.
             </p>
-            <div className="mt-5 flex items-center gap-3">
-              <span
-                aria-label="LinkedIn profile not configured"
-                aria-disabled="true"
-                className="inline-flex h-10 w-10 cursor-not-allowed items-center justify-center rounded-lg bg-[#0A66C2] text-white opacity-70"
-              >
-                <FaLinkedinIn size={18} aria-hidden="true" />
-              </span>
+            {!showcaseMode && (
+              <div className="mt-5 flex items-center gap-3">
+                <span
+                  aria-label="LinkedIn profile not configured"
+                  aria-disabled="true"
+                  className="inline-flex h-10 w-10 cursor-not-allowed items-center justify-center rounded-lg bg-[#0A66C2] text-white opacity-70"
+                >
+                  <FaLinkedinIn size={18} aria-hidden="true" />
+                </span>
 
-              <span
-                aria-label="Instagram profile not configured"
-                aria-disabled="true"
-                className="inline-flex h-10 w-10 cursor-not-allowed items-center justify-center rounded-lg bg-[#E4405F] text-white opacity-70"
-              >
-                <FaInstagram size={18} aria-hidden="true" />
-              </span>
+                <span
+                  aria-label="Instagram profile not configured"
+                  aria-disabled="true"
+                  className="inline-flex h-10 w-10 cursor-not-allowed items-center justify-center rounded-lg bg-[#E4405F] text-white opacity-70"
+                >
+                  <FaInstagram size={18} aria-hidden="true" />
+                </span>
 
-              <span
-                aria-label="WhatsApp contact not configured"
-                aria-disabled="true"
-                className="inline-flex h-10 w-10 cursor-not-allowed items-center justify-center rounded-lg bg-[#25D366] text-white opacity-70"
-              >
-                <FaWhatsapp size={19} aria-hidden="true" />
-              </span>
-            </div>
+                <span
+                  aria-label="WhatsApp contact not configured"
+                  aria-disabled="true"
+                  className="inline-flex h-10 w-10 cursor-not-allowed items-center justify-center rounded-lg bg-[#25D366] text-white opacity-70"
+                >
+                  <FaWhatsapp size={19} aria-hidden="true" />
+                </span>
+              </div>
+            )}
           </div>
 
           {/* ===================================================
@@ -156,37 +162,41 @@ export default function Footer() {
               </div>
 
               {/* Email */}
-              <div className="flex items-center gap-3 text-sm text-[#98A2B3]">
-                <svg
-                  aria-hidden="true"
-                  viewBox="0 0 24 24"
-                  fill="none"
-                  stroke="currentColor"
-                  strokeWidth="1.8"
-                  className="h-4 w-4 shrink-0 text-[#F65011]"
-                >
-                  <rect x="3" y="5" width="18" height="14" rx="2" />
-                  <path d="m3 7 9 6 9-6" />
-                </svg>
+              {!showcaseMode && (
+                <div className="flex items-center gap-3 text-sm text-[#98A2B3]">
+                  <svg
+                    aria-hidden="true"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    strokeWidth="1.8"
+                    className="h-4 w-4 shrink-0 text-[#F65011]"
+                  >
+                    <rect x="3" y="5" width="18" height="14" rx="2" />
+                    <path d="m3 7 9 6 9-6" />
+                  </svg>
 
-                <span className="break-all">hello@example.com</span>
-              </div>
+                  <span className="break-all">hello@example.com</span>
+                </div>
+              )}
 
               {/* Phone */}
-              <div className="flex items-center gap-3 text-sm text-[#98A2B3]">
-                <svg
-                  aria-hidden="true"
-                  viewBox="0 0 24 24"
-                  fill="none"
-                  stroke="currentColor"
-                  strokeWidth="1.8"
-                  className="h-4 w-4 shrink-0 text-[#F65011]"
-                >
-                  <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92Z" />
-                </svg>
+              {!showcaseMode && (
+                <div className="flex items-center gap-3 text-sm text-[#98A2B3]">
+                  <svg
+                    aria-hidden="true"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    strokeWidth="1.8"
+                    className="h-4 w-4 shrink-0 text-[#F65011]"
+                  >
+                    <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 1 2.81.7A2 2 0 0 1 22 16.92Z" />
+                  </svg>
 
-                <span>+1 (555) 010-2026</span>
-              </div>
+                  <span>+1 (555) 010-2026</span>
+                </div>
+              )}
             </div>
 
             {/* CTA */}

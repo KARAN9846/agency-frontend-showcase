@@ -1,7 +1,13 @@
 import Link from "next/link";
 import { Mail, MapPin, MessageCircle, Phone } from "lucide-react";
 
-export default function ContactDetails() {
+type ContactDetailsProps = {
+  showcaseMode?: boolean;
+};
+
+export default function ContactDetails({
+  showcaseMode = false,
+}: ContactDetailsProps) {
   return (
     <section className="border-t border-[#E4E7EC] bg-[#F8FAFC]">
       <div className="mx-auto max-w-7xl px-6 py-14 sm:px-8 sm:py-16 lg:px-10 lg:py-20">
@@ -56,8 +62,9 @@ export default function ContactDetails() {
                       Send a project enquiry
                     </p>
                     <p className="mt-1.5 text-sm leading-6 text-[#667085]">
-                      Use the secure form above to demonstrate the server-side
-                      email workflow.
+                      {showcaseMode
+                        ? "Use the form above to demonstrate its interface and validation flow."
+                        : "Use the secure form above to demonstrate the server-side email workflow."}
                     </p>
                   </div>
                 </div>
@@ -93,33 +100,41 @@ export default function ContactDetails() {
                 </div>
               </div>
 
-              <div className="rounded-2xl border border-[#E4E7EC] bg-white p-5">
-                <div className="flex items-start gap-4">
-                  <span className="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl bg-[#FFF3EE] text-[#F65011]">
-                    <Mail aria-hidden="true" size={18} strokeWidth={1.8} />
-                  </span>
-                  <div className="min-w-0">
-                    <p className="text-sm font-semibold text-[#98A2B3]">Demo email</p>
-                    <p className="mt-1.5 break-all text-sm font-semibold leading-6 text-[#101828]">hello@example.com</p>
+              {!showcaseMode && (
+                <div className="rounded-2xl border border-[#E4E7EC] bg-white p-5">
+                  <div className="flex items-start gap-4">
+                    <span className="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl bg-[#FFF3EE] text-[#F65011]">
+                      <Mail aria-hidden="true" size={18} strokeWidth={1.8} />
+                    </span>
+                    <div className="min-w-0">
+                      <p className="text-sm font-semibold text-[#98A2B3]">Demo email</p>
+                      <p className="mt-1.5 break-all text-sm font-semibold leading-6 text-[#101828]">hello@example.com</p>
+                    </div>
                   </div>
                 </div>
-              </div>
+              )}
 
-              <div className="rounded-2xl border border-[#E4E7EC] bg-white p-5">
-                <div className="flex items-start gap-4">
-                  <span className="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl bg-[#FFF3EE] text-[#F65011]">
-                    <Phone aria-hidden="true" size={18} strokeWidth={1.8} />
-                  </span>
-                  <div>
-                    <p className="text-sm font-semibold text-[#98A2B3]">Demo phone</p>
-                    <p className="mt-1.5 text-sm font-semibold leading-6 text-[#101828]">+1 (555) 010-2026</p>
+              {!showcaseMode && (
+                <div className="rounded-2xl border border-[#E4E7EC] bg-white p-5">
+                  <div className="flex items-start gap-4">
+                    <span className="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl bg-[#FFF3EE] text-[#F65011]">
+                      <Phone aria-hidden="true" size={18} strokeWidth={1.8} />
+                    </span>
+                    <div>
+                      <p className="text-sm font-semibold text-[#98A2B3]">Demo phone</p>
+                      <p className="mt-1.5 text-sm font-semibold leading-6 text-[#101828]">+1 (555) 010-2026</p>
+                    </div>
                   </div>
                 </div>
-              </div>
+              )}
             </div>
 
             <div className="flex flex-col gap-3 pt-2 sm:flex-row sm:items-center sm:justify-between">
-              <p className="text-sm text-[#667085]">The contact form remains fully functional when configured.</p>
+              <p className="text-sm text-[#667085]">
+                {showcaseMode
+                  ? "For project enquiries, please contact me through Upwork."
+                  : "The contact form remains fully functional when configured."}
+              </p>
               <Link href="#contact-form" className="inline-flex min-h-10 items-center justify-center self-start rounded-xl bg-[#F65011] px-5 text-sm font-semibold !text-white transition-all duration-300 hover:-translate-y-0.5 hover:bg-[#D9430B] hover:shadow-[0_10px_25px_rgba(246,80,17,0.18)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#F65011] focus-visible:ring-offset-2">
                 Contact Form <span aria-hidden="true" className="ml-2">→</span>
               </Link>

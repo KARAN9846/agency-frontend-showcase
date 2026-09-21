@@ -43,11 +43,18 @@ type FormErrors = {
   message?: string;
 };
 
-export default function ContactForm() {
+type ContactFormProps = {
+  showcaseMode?: boolean;
+};
+
+type SubmissionResult = "normal" | "demo" | null;
+
+export default function ContactForm({ showcaseMode = false }: ContactFormProps) {
   const [selectedService, setSelectedService] = useState("");
   const [errors, setErrors] = useState<FormErrors>({});
   const [isSubmitting, setIsSubmitting] = useState(false);
-  const [isValidated, setIsValidated] = useState(false);
+  const [submissionResult, setSubmissionResult] =
+    useState<SubmissionResult>(null);
 
   function validateForm(form: HTMLFormElement) {
     const formData = new FormData(form);
@@ -86,7 +93,7 @@ export default function ContactForm() {
 
     const nextErrors = validateForm(form);
     setErrors(nextErrors);
-    setIsValidated(false);
+    setSubmissionResult(null);
 
     if (Object.keys(nextErrors).length > 0) {
       return;
@@ -121,7 +128,9 @@ export default function ContactForm() {
         throw new Error(data.message || "Unable to submit your enquiry.");
       }
 
-      setIsValidated(true);
+      setSubmissionResult(
+        data.demo === true || showcaseMode ? "demo" : "normal",
+      );
       setErrors({});
 
       form.reset();
@@ -147,7 +156,7 @@ export default function ContactForm() {
           {/* Left information */}
           <div className="max-w-md">
             <p className="text-xs font-semibold uppercase tracking-[0.18em] text-[#F65011] sm:text-sm">
-              Start a Conversation
+              {showcaseMode ? "Portfolio Demo" : "Start a Conversation"}
             </p>
 
             <h2 className="mt-4 text-3xl font-bold tracking-[-0.04em] text-[#101828] sm:text-4xl">
@@ -155,8 +164,9 @@ export default function ContactForm() {
             </h2>
 
             <p className="mt-5 text-base leading-7 text-[#667085]">
-              Share a little about your business, idea or challenge. The more
-              context you provide, the better we can understand where to start.
+              {showcaseMode
+                ? "Explore the form interface and its validation flow. No enquiry or email will be sent from this showcase."
+                : "Share a little about your business, idea or challenge. The more context you provide, the better we can understand where to start."}
             </p>
 
             {/* Service list */}
@@ -227,6 +237,17 @@ export default function ContactForm() {
             noValidate
             className="group relative rounded-[2rem] border border-[#E4E7EC] bg-[#F8FAFC] p-5 shadow-[0_18px_50px_rgba(16,24,40,0.05)] transition-all duration-500 ease-out hover:-translate-y-0.5 hover:border-[#F65011]/20 hover:shadow-[0_22px_55px_rgba(16,24,40,0.07)] sm:p-7 lg:p-8"
           >
+            {showcaseMode && (
+              <div className="mb-6 rounded-xl border border-[#F65011]/20 bg-[#FFF8F5] px-4 py-3">
+                <p className="text-sm font-semibold text-[#101828]">
+                  Portfolio demonstration
+                </p>
+                <p className="mt-1 text-xs leading-5 text-[#667085]">
+                  Submissions demonstrate validation only. For project enquiries,
+                  please contact me through Upwork.
+                </p>
+              </div>
+            )}
             <div className="hidden" aria-hidden="true">
               <label htmlFor="website">Website</label>
               <input
@@ -351,7 +372,7 @@ export default function ContactForm() {
                           ...current,
                           service: undefined,
                         }));
-                        setIsValidated(false);
+                        setSubmissionResult(null);
                       }}
                       className={[
                         "inline-flex items-center gap-2 rounded-full border px-4 py-2 text-xs font-medium transition-all duration-300",
@@ -413,7 +434,9 @@ export default function ContactForm() {
             {/* Submit */}
             <div className="mt-6 flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
               <p className="min-w-0 text-xs leading-5 text-[#98A2B3]">
-                We&apos;ll use your information only to respond to your enquiry.
+                {showcaseMode
+                  ? "Demo entries are validated but are not delivered or retained."
+                  : "We'll use your information only to respond to your enquiry."}
               </p>
 
               <button
@@ -421,7 +444,13 @@ export default function ContactForm() {
                 disabled={isSubmitting}
                 className="group inline-flex min-h-12 shrink-0 whitespace-nowrap items-center justify-center rounded-xl bg-[#F65011] px-6 text-sm font-semibold text-white transition-all duration-500 ease-out hover:-translate-y-0.5 hover:bg-[#D9430B] hover:shadow-[0_14px_30px_rgba(246,80,17,0.2)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#F65011] focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-70"
               >
-                {isSubmitting ? "Sending..." : "Send Enquiry"}
+                {isSubmitting
+                  ? showcaseMode
+                    ? "Validating..."
+                    : "Sending..."
+                  : showcaseMode
+                    ? "Try Demo Submission"
+                    : "Send Enquiry"}
                 <span
                   aria-hidden="true"
                   className={[
@@ -434,15 +463,24 @@ export default function ContactForm() {
               </button>
             </div>
 
-            {isValidated && (
+            {submissionResult && (
               <div className="mt-4 rounded-xl border border-[#F65011]/20 bg-[#FFF8F5] px-4 py-3">
                 <p className="text-sm font-semibold text-[#101828]">
-                  Your enquiry has been submitted successfully.
+                  {submissionResult === "demo"
+                    ? "Portfolio Demo"
+                    : "Your enquiry has been submitted successfully."}
                 </p>
 
                 <p className="mt-1 text-xs leading-5 text-[#667085]">
-                  Thank you for reaching out. The portfolio owner can review
-                  your enquiry and respond using the email you provided.
+                  {submissionResult === "demo" ? (
+                    <>
+                      This form demonstrates the interface and validation flow.
+                      <br />
+                      For project enquiries, please contact me through Upwork.
+                    </>
+                  ) : (
+                    "Thank you for reaching out. The portfolio owner can review your enquiry and respond using the email you provided."
+                  )}
                 </p>
               </div>
             )}
